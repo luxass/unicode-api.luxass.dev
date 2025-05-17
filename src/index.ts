@@ -11,7 +11,7 @@ const app = new OpenAPIHono<HonoEnv>();
 app.route("/", V1_UNICODE_VERSIONS_ROUTER);
 
 app.get(
-  "/scalar",
+  "/",
   Scalar({
     url: "/openapi.json",
     layout: "classic",
