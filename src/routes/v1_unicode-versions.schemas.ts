@@ -13,5 +13,11 @@ export const UnicodeVersionSchema = z.object({
   ucdUrl: z.string().url().openapi({
     description: "The URL to the Unicode Character Database (UCD) for this version.",
   }),
+  status: z.union([
+    z.literal("stable"),
+    z.literal("draft"),
+  ]).openapi({
+    description: "The status of the Unicode version.",
+  }),
 }).openapi("UnicodeVersion");
 export type UnicodeVersion = z.infer<typeof UnicodeVersionSchema>;

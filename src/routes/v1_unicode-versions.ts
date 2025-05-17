@@ -10,7 +10,7 @@ export const V1_UNICODE_VERSIONS_ROUTER = new OpenAPIHono<HonoEnv>().basePath("/
 
 V1_UNICODE_VERSIONS_ROUTER.get("*", cache({
   cacheName: "unicode-api:versions",
-  cacheControl: "max-age=3600",
+  cacheControl: "max-age=172800",
 }));
 
 V1_UNICODE_VERSIONS_ROUTER.openapi(LIST_ALL_UNICODE_VERSIONS_ROUTE, async (c) => {
@@ -56,6 +56,7 @@ V1_UNICODE_VERSIONS_ROUTER.openapi(LIST_ALL_UNICODE_VERSIONS_ROUTE, async (c) =>
       documentationUrl,
       date: dateMatch[1],
       ucdUrl,
+      status: "stable",
     });
   }
 
