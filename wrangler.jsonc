@@ -10,13 +10,16 @@
     "enabled": true
   },
   "placement": { "mode": "smart" },
+  "vars": {
+    "API_VERSION": "x.y.z"
+  },
   "env": {
     "preview": {
       "name": "unicode-api",
       "preview_urls": false,
       "vars": {
         "ENVIRONMENT": "preview",
-        "PROXY_URL": "https://preview.unicode-api.luxass.dev"
+        "PROXY_URL": "https://preview.unicode-proxy.luxass.dev"
       },
       "routes": [
         {
@@ -30,7 +33,7 @@
       "preview_urls": false,
       "vars": {
         "ENVIRONMENT": "production",
-        "PROXY_URL": "https://unicode-api.luxass.dev"
+        "PROXY_URL": "https://unicode-proxy.luxass.dev"
       },
       "routes": [
         {
