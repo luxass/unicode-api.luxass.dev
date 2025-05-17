@@ -1,0 +1,43 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "unicode-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-03-13",
+  "observability": {
+    "logs": {
+      "enabled": true
+    },
+    "enabled": true
+  },
+  "placement": { "mode": "smart" },
+  "env": {
+    "preview": {
+      "name": "unicode-api",
+      "preview_urls": false,
+      "vars": {
+        "ENVIRONMENT": "preview",
+        "PROXY_URL": "https://preview.unicode-api.luxass.dev"
+      },
+      "routes": [
+        {
+          "custom_domain": true,
+          "pattern": "preview.unicode-api.luxass.dev"
+        }
+      ]
+    },
+    "production": {
+      "name": "unicode-api",
+      "preview_urls": false,
+      "vars": {
+        "ENVIRONMENT": "production",
+        "PROXY_URL": "https://unicode-api.luxass.dev"
+      },
+      "routes": [
+        {
+          "custom_domain": true,
+          "pattern": "unicode-api.luxass.dev"
+        }
+      ]
+    }
+  }
+}

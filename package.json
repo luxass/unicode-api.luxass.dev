@@ -1,0 +1,42 @@
+{
+  "name": "unicode-api",
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@10.10.0",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "wrangler deploy --dry-run --outdir=dist",
+    "deploy": "wrangler deploy",
+    "test": "pnpm vitest --run",
+    "test:watch": "pnpm vitest",
+    "lint": "eslint .",
+    "lint:openapi": "pnpm run build:openapi && spectral lint ./node_modules/.openapi/openapi.json",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "typecheck": "pnpm run cf-typegen && tsc --noEmit"
+  },
+  "dependencies": {
+    "@hono/zod-openapi": "^0.19.6",
+    "@luxass/unicode-utils": "https://pkg.pr.new/@luxass/unicode-utils@25",
+    "@scalar/hono-api-reference": "^0.8.8",
+    "hono": "^4.7.8",
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.8.24",
+    "@luxass/eslint-config": "^4.18.1",
+    "@luxass/spectral-ruleset": "^0.0.1",
+    "@stoplight/spectral-cli": "^6.15.0",
+    "eslint": "^9.26.0",
+    "eslint-plugin-format": "^1.0.1",
+    "nanotar": "^0.2.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.2",
+    "wrangler": "^4.14.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "workerd"
+    ]
+  }
+}
