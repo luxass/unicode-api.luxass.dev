@@ -9,7 +9,7 @@ import { LIST_ALL_UNICODE_VERSIONS_ROUTE } from "./v1_unicode-versions.openapi";
 export const V1_UNICODE_VERSIONS_ROUTER = new OpenAPIHono<HonoEnv>().basePath("/api/v1/unicode-versions");
 
 V1_UNICODE_VERSIONS_ROUTER.get("*", cache({
-  cacheName: "unicode-versions",
+  cacheName: "unicode-api:versions",
   cacheControl: "max-age=3600",
 }));
 
