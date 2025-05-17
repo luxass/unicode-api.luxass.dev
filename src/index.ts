@@ -4,11 +4,13 @@ import { Scalar } from "@scalar/hono-api-reference";
 import { env } from "hono/adapter";
 import { HTTPException } from "hono/http-exception";
 import { buildOpenApiConfig } from "./openapi";
+import { V1_UNICODE_FILES_ROUTER } from "./routes/v1_unicode-files";
 import { V1_UNICODE_VERSIONS_ROUTER } from "./routes/v1_unicode-versions";
 
 const app = new OpenAPIHono<HonoEnv>();
 
 app.route("/", V1_UNICODE_VERSIONS_ROUTER);
+app.route("/", V1_UNICODE_FILES_ROUTER);
 
 app.get(
   "/",

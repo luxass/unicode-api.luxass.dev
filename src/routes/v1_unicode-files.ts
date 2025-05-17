@@ -5,7 +5,7 @@ import { cache } from "hono/cache";
 import { createError } from "../utils";
 import { GET_UNICODE_FILES_BY_VERSION_ROUTE } from "./v1_unicode-files.openapi";
 
-export const V1_UNICODE_FILES_ROUTER = new OpenAPIHono<HonoEnv>().basePath("/api/v1/unicode-versions");
+export const V1_UNICODE_FILES_ROUTER = new OpenAPIHono<HonoEnv>().basePath("/api/v1/unicode-files");
 
 interface Entry {
   name: string;
