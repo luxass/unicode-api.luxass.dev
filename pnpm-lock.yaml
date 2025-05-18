@@ -12,8 +12,8 @@ importers:
         specifier: ^0.19.6
         version: 0.19.6(hono@4.7.10)(zod@3.24.4)
       '@luxass/unicode-utils':
-        specifier: https://pkg.pr.new/@luxass/unicode-utils@25
-        version: https://pkg.pr.new/@luxass/unicode-utils@25
+        specifier: ^0.8.0
+        version: 0.8.0
       '@scalar/hono-api-reference':
         specifier: ^0.8.10
         version: 0.8.10(hono@4.7.10)
@@ -756,9 +756,8 @@ packages:
   '@luxass/spectral-ruleset@0.0.3':
     resolution: {integrity: sha512-LxIlvLDMLDAtvnTzAWWxfDtJd6P3fsuJVTWz0ZCGUIZ1fR7itH2m8Y7hJTMPX91gTFIfSfu1XLpALa1zT4nEHw==}
 
-  '@luxass/unicode-utils@https://pkg.pr.new/@luxass/unicode-utils@25':
-    resolution: {tarball: https://pkg.pr.new/@luxass/unicode-utils@25}
-    version: 0.6.0
+  '@luxass/unicode-utils@0.8.0':
+    resolution: {integrity: sha512-UniG5YOR4PnFg9XQuR/XoicXEwU7ukj73JGHJK4CfvFGYwz892Z2+k+wkx7rH21DhR5zjUXFU9DFiOTzBLPCcQ==}
 
   '@luxass/utils@2.1.0':
     resolution: {integrity: sha512-TZj7ktGHuoXiOTypAagFQ87pjPEcX82bSepu8fIdFlzlOrh4ccXBvqKPQbJi88j481Q8H7QCV5VOgV32bqJb9A==}
@@ -3773,7 +3772,7 @@ snapshots:
 
   '@luxass/spectral-ruleset@0.0.3': {}
 
-  '@luxass/unicode-utils@https://pkg.pr.new/@luxass/unicode-utils@25':
+  '@luxass/unicode-utils@0.8.0':
     dependencies:
       '@luxass/utils': 2.1.0
 
