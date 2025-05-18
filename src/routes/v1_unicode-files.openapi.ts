@@ -17,7 +17,7 @@ export const GET_UNICODE_FILES_BY_VERSION_ROUTE = createRoute({
       },
     },
   ],
-  description: "List all Unicode Versions available, including metadata.",
+  description: "List all UCD files for a specific Unicode version.",
   responses: {
     200: {
       content: {
@@ -25,7 +25,7 @@ export const GET_UNICODE_FILES_BY_VERSION_ROUTE = createRoute({
           schema: z.array(UnicodeVersionFileSchema).openapi("UnicodeVersionFiles"),
         },
       },
-      description: "A list of Unicode versions with metadata.",
+      description: "A list of UCD files for the specified Unicode version.",
     },
     400: {
       content: {
