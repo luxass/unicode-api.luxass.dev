@@ -54,7 +54,7 @@ V1_UNICODE_VERSIONS_ROUTER.openapi(LIST_ALL_UNICODE_VERSIONS_ROUTE, async (c) =>
 
       const ucdUrl = `https://www.unicode.org/Public/${ucdVersion}/${ucdVersion.includes("Update") ? "" : "ucd"}`;
 
-      versions.push({
+      versions.unshift({
         version,
         documentationUrl,
         date: dateMatch[1],
@@ -63,12 +63,26 @@ V1_UNICODE_VERSIONS_ROUTER.openapi(LIST_ALL_UNICODE_VERSIONS_ROUTE, async (c) =>
       });
     }
 
+    if (draft != null && !versions.some((v) => v.status === "draft")) {
+      versions.push({
+        version: draft,
+        documentationUrl: `https://www.unicode.org/versions/Unicode${draft}/`,
+        date: null,
+        ucdUrl: `https://www.unicode.org/Public/${draft}/ucd`,
+        status: "draft",
+      });
+    }
+
     if (versions.length === 0) {
       return createError(c, 404, "No Unicode versions found");
     }
 
     // sort versions by date in descending order
-    versions.sort((a, b) => Number.parseInt(b.date) - Number.parseInt(a.date));
+    versions.sort((a, b) => {
+      if (a.date === null) return -1;
+      if (b.date === null) return 1;
+      return Number.parseInt(b.date) - Number.parseInt(a.date);
+    });
 
     return c.json(versions, 200);
   } catch (error) {

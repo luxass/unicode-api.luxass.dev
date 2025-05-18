@@ -9,7 +9,7 @@ export const UnicodeVersionSchema = z.object({
   }),
   date: z.string().regex(/^\d{4}$/, "Year must be a four-digit number").openapi({
     description: "The year of the Unicode version.",
-  }),
+  }).nullable(),
   ucdUrl: z.string().url().openapi({
     description: "The URL to the Unicode Character Database (UCD) for this version.",
   }),
