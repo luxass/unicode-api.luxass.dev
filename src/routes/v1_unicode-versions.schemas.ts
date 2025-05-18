@@ -20,4 +20,10 @@ export const UnicodeVersionSchema = z.object({
     description: "The status of the Unicode version.",
   }),
 }).openapi("UnicodeVersion");
+
 export type UnicodeVersion = z.infer<typeof UnicodeVersionSchema>;
+
+export const UnicodeVersionMappingsSchema = z.record(
+  z.string(),
+  z.string(),
+).openapi("UnicodeVersionMappings");

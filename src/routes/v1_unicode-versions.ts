@@ -1,10 +1,10 @@
 import type { HonoEnv } from "../types";
 import type { UnicodeVersion } from "./v1_unicode-versions.schemas";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { getCurrentDraftVersion, mapUnicodeVersion } from "@luxass/unicode-utils";
+import { getCurrentDraftVersion, mapUnicodeVersion, UNICODE_MAPPINGS } from "@luxass/unicode-utils";
 import { cache } from "hono/cache";
 import { createError } from "../utils";
-import { LIST_ALL_UNICODE_VERSIONS_ROUTE } from "./v1_unicode-versions.openapi";
+import { GET_UNICODE_MAPPINGS, LIST_ALL_UNICODE_VERSIONS_ROUTE } from "./v1_unicode-versions.openapi";
 
 export const V1_UNICODE_VERSIONS_ROUTER = new OpenAPIHono<HonoEnv>().basePath("/api/v1/unicode-versions");
 
@@ -75,4 +75,8 @@ V1_UNICODE_VERSIONS_ROUTER.openapi(LIST_ALL_UNICODE_VERSIONS_ROUTE, async (c) =>
     console.error("Error fetching Unicode versions:", error);
     return createError(c, 500, "Internal Server Error");
   }
+});
+
+V1_UNICODE_VERSIONS_ROUTER.openapi(GET_UNICODE_MAPPINGS, async (c) => {
+  return c.json(UNICODE_MAPPINGS, 200);
 });
