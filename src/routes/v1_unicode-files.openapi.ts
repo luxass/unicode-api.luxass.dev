@@ -1,5 +1,5 @@
 import { createRoute, z } from "@hono/zod-openapi";
-import { ApiErrorSchema, RateLimitErrorSchema } from "../schemas";
+import { ApiErrorSchema } from "../schemas";
 import { UnicodeVersionFileSchema } from "./v1_unicode-files.schemas";
 
 export const GET_UNICODE_FILES_BY_VERSION_ROUTE = createRoute({
@@ -38,7 +38,7 @@ export const GET_UNICODE_FILES_BY_VERSION_ROUTE = createRoute({
     429: {
       content: {
         "application/json": {
-          schema: RateLimitErrorSchema,
+          schema: ApiErrorSchema,
         },
       },
       description: "Rate Limit Exceeded",
