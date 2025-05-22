@@ -17,13 +17,13 @@
   },
   "dependencies": {
     "@hono/zod-openapi": "^0.19.6",
-    "@luxass/unicode-utils": "^0.8.0",
-    "@scalar/hono-api-reference": "^0.8.10",
+    "@luxass/unicode-utils": "^0.9.0",
+    "@scalar/hono-api-reference": "^0.9.1",
     "hono": "^4.7.10",
-    "zod": "^3.25.3"
+    "zod": "^3.25.20"
   },
   "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.8.30",
+    "@cloudflare/vitest-pool-workers": "^0.8.32",
     "@luxass/eslint-config": "^4.18.1",
     "@luxass/spectral-ruleset": "^0.0.5",
     "@stoplight/spectral-cli": "^6.15.0",
@@ -33,7 +33,7 @@
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
     "vitest": "^3.1.4",
-    "wrangler": "^4.15.2"
+    "wrangler": "^4.16.1"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
