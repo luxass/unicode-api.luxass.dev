@@ -1,7 +1,7 @@
 import type { HonoEnv } from "../types";
 import type { UnicodeVersion } from "./v1_unicode-versions.schemas";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { getCurrentDraftVersion, mapUnicodeVersion, UNICODE_MAPPINGS } from "@luxass/unicode-utils";
+import { getCurrentDraftVersion, mapToUCDPathVersion, UNICODE_TO_UCD_PATH_MAPPINGS } from "@luxass/unicode-utils";
 import { cache } from "hono/cache";
 import { createError } from "../utils";
 import { GET_UNICODE_MAPPINGS, LIST_ALL_UNICODE_VERSIONS_ROUTE } from "./v1_unicode-versions.openapi";
@@ -50,7 +50,7 @@ V1_UNICODE_VERSIONS_ROUTER.openapi(LIST_ALL_UNICODE_VERSIONS_ROUTE, async (c) =>
       // look for a year pattern anywhere in the row
       const dateMatch = row.match(/<td[^>]*>(\d{4})<\/td>/);
       if (!dateMatch) continue;
-      const ucdVersion = mapUnicodeVersion(version);
+      const ucdVersion = mapToUCDPathVersion(version);
 
       const ucdUrl = `https://www.unicode.org/Public/${ucdVersion}/${ucdVersion.includes("Update") ? "" : "ucd"}`;
 
@@ -92,5 +92,5 @@ V1_UNICODE_VERSIONS_ROUTER.openapi(LIST_ALL_UNICODE_VERSIONS_ROUTE, async (c) =>
 });
 
 V1_UNICODE_VERSIONS_ROUTER.openapi(GET_UNICODE_MAPPINGS, async (c) => {
-  return c.json(UNICODE_MAPPINGS, 200);
+  return c.json(UNICODE_TO_UCD_PATH_MAPPINGS, 200);
 });
