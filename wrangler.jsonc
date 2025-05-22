@@ -32,7 +32,7 @@
       "preview_urls": false,
       "vars": {
         "ENVIRONMENT": "preview",
-        "PROXY_URL": "https://preview.unicode-proxy.luxass.dev"
+        "PROXY_URL": "https://preview.unicode-proxy.ucdjs.dev"
       },
       "routes": [
         {
@@ -59,7 +59,7 @@
       "preview_urls": false,
       "vars": {
         "ENVIRONMENT": "production",
-        "PROXY_URL": "https://unicode-proxy.luxass.dev"
+        "PROXY_URL": "https://unicode-proxy.ucdjs.dev"
       },
       "routes": [
         {
