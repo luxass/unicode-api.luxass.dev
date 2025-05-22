@@ -1,6 +1,6 @@
 import type { HonoEnv } from "../types";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { hasUCDPath, mapUnicodeVersion, UNICODE_VERSIONS_WITH_UCD } from "@luxass/unicode-utils";
+import { hasUCDPath, mapToUCDPathVersion, UNICODE_VERSION_METADATA } from "@luxass/unicode-utils";
 import { cache } from "hono/cache";
 import { createError } from "../utils";
 import { GET_UNICODE_FILES_BY_VERSION_ROUTE } from "./v1_unicode-files.openapi";
@@ -27,12 +27,12 @@ V1_UNICODE_FILES_ROUTER.get("*", cache({
 V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) => {
   const version = c.req.param("version");
 
-  if (!UNICODE_VERSIONS_WITH_UCD.map((v) => v.version)
-    .includes(version as typeof UNICODE_VERSIONS_WITH_UCD[number]["version"])) {
+  if (!UNICODE_VERSION_METADATA.map((v) => v.version)
+    .includes(version as typeof UNICODE_VERSION_METADATA[number]["version"])) {
     return createError(c, 400, "Unicode version does not have UCD");
   }
 
-  const mappedVersion = mapUnicodeVersion(version);
+  const mappedVersion = mapToUCDPathVersion(version);
   if (!mappedVersion) {
     return createError(c, 400, "Invalid Unicode version");
   }
