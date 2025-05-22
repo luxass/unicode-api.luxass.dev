@@ -81,7 +81,7 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
 
     return [...fileEntries, ...dirEntries];
   }
-
+  console.log(`${c.env.PROXY_URL}/${mappedVersion}${extraPath}`);
   try {
     const response = await fetch(`${c.env.PROXY_URL}/${mappedVersion}${extraPath}`);
     if (!response.ok) {

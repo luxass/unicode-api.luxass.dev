@@ -11,7 +11,8 @@
   },
   "placement": { "mode": "smart" },
   "vars": {
-    "API_VERSION": "x.y.z"
+    "API_VERSION": "x.y.z",
+    "PROXY_URL": "https://unicode-proxy.ucdjs.dev"
   },
   "unsafe": {
     "bindings": [
