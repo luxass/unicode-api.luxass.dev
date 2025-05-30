@@ -1,6 +1,6 @@
 import type { HonoEnv } from "../types";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { hasUCDPath, mapToUCDPathVersion, UNICODE_VERSION_METADATA } from "@luxass/unicode-utils";
+import { hasUCDFolderPath, resolveUCDVersion, UNICODE_VERSION_METADATA } from "@luxass/unicode-utils";
 import { cache } from "hono/cache";
 import { createError } from "../utils";
 import { GET_UNICODE_FILES_BY_VERSION_ROUTE } from "./v1_unicode-files.openapi";
@@ -32,12 +32,12 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
     return createError(c, 400, "Unicode version does not have UCD");
   }
 
-  const mappedVersion = mapToUCDPathVersion(version);
+  const mappedVersion = resolveUCDVersion(version);
   if (!mappedVersion) {
     return createError(c, 400, "Invalid Unicode version");
   }
 
-  const extraPath = hasUCDPath(mappedVersion) ? "/ucd" : "";
+  const extraPath = hasUCDFolderPath(mappedVersion) ? "/ucd" : "";
   // eslint-disable-next-line no-console
   console.info({
     version,
