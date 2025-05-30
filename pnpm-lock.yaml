@@ -12,8 +12,8 @@ importers:
         specifier: ^0.19.6
         version: 0.19.6(hono@4.7.10)(zod@3.25.20)
       '@luxass/unicode-utils':
-        specifier: ^0.11.0
-        version: 0.11.0
+        specifier: ^0.12.0-beta.3
+        version: 0.12.0-beta.3
       '@scalar/hono-api-reference':
         specifier: ^0.9.1
         version: 0.9.1(hono@4.7.10)
@@ -756,8 +756,8 @@ packages:
   '@luxass/spectral-ruleset@0.0.5':
     resolution: {integrity: sha512-eRxcMSofTBZvBkTw5Faw5cvU0bbqV1pFXcYRFIQWp/R33v/YHirLlKwLec+ryKp65axylCTIxULIr7UjyFeNoA==}
 
-  '@luxass/unicode-utils@0.11.0':
-    resolution: {integrity: sha512-SjXHMnldUuqYY4NcyD8peL3HJglYxSgGHzpjqkAzG6gwyvlJSnZgmoz5UcFuuxpk0aM9flY5QcWOnx/080zDfA==}
+  '@luxass/unicode-utils@0.12.0-beta.3':
+    resolution: {integrity: sha512-p6SxurNBjg9hDzOVWSS+DgbaZjznny3ySRjzMxMhg/8bUuYwyYaHU4ffupY3l/C2sf12/kWIFlovN/hTd8PfWg==}
 
   '@luxass/utils@2.2.1':
     resolution: {integrity: sha512-riQdjsEXmHxaPDcWappVi1YYF/rsveZTvSIsev1m7qYQrRq6aRNYWTVVPhye3Pdf0NCWUNIKIdtrtpHhx+SgYA==}
@@ -3775,9 +3775,10 @@ snapshots:
 
   '@luxass/spectral-ruleset@0.0.5': {}
 
-  '@luxass/unicode-utils@0.11.0':
+  '@luxass/unicode-utils@0.12.0-beta.3':
     dependencies:
       '@luxass/utils': 2.2.1
+      defu: 6.1.4
 
   '@luxass/utils@2.2.1': {}
 
