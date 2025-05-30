@@ -51,7 +51,7 @@ V1_UNICODE_VERSIONS_ROUTER.openapi(LIST_ALL_UNICODE_VERSIONS_ROUTE, async (c) =>
       const dateMatch = row.match(/<td[^>]*>(\d{4})<\/td>/);
       if (!dateMatch) continue;
       const ucdVersion = resolveUCDVersion(version);
-      const ucdUrl = `https://www.unicode.org/Public/${ucdVersion}/${hasUCDFolderPath(ucdVersion) ? "" : "ucd"}`;
+      const ucdUrl = `https://www.unicode.org/Public/${ucdVersion}/${hasUCDFolderPath(ucdVersion) ? "ucd" : ""}`;
 
       versions.unshift({
         version,
