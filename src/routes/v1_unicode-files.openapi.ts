@@ -5,7 +5,7 @@ import { UnicodeVersionFileSchema } from "./v1_unicode-files.schemas";
 export const GET_UNICODE_FILES_BY_VERSION_ROUTE = createRoute({
   method: "get",
   path: "/{version}",
-  tags: ["Misc"],
+  tags: ["Files"],
   parameters: [
     {
       name: "version",
