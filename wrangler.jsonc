@@ -29,7 +29,7 @@
   },
   "env": {
     "preview": {
-      "name": "unicode-api",
+      "name": "unicode-api-preview",
       "preview_urls": false,
       "vars": {
         "ENVIRONMENT": "preview",
