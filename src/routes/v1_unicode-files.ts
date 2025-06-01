@@ -58,15 +58,15 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
 
   const excludePatterns = exclude?.split(",").map((p) => p.trim()).filter(Boolean) || [];
 
-  if (!includeTests) {
+  if (!includeTests || includeTests !== "true") {
     excludePatterns.push("**/*Test*");
   }
 
-  if (!includeReadmes) {
+  if (!includeReadmes || includeReadmes !== "true") {
     excludePatterns.push("**/Readme.txt");
   }
 
-  if (!includeHTMLFiles) {
+  if (!includeHTMLFiles || includeHTMLFiles !== "true") {
     excludePatterns.push("**/*.html");
   }
 
