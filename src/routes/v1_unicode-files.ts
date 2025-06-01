@@ -26,6 +26,21 @@ V1_UNICODE_FILES_ROUTER.get("*", cache({
 
 V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) => {
   const version = c.req.param("version");
+  const {
+    exclude,
+    includeTests = false,
+    includeReadmes = false,
+    includeHTMLFiles = false,
+  } = c.req.query();
+
+  // eslint-disable-next-line no-console
+  console.info({
+    exclude,
+    includeTests,
+    includeReadmes,
+    includeHTMLFiles,
+    version,
+  });
 
   if (!UNICODE_VERSION_METADATA.map((v) => v.version)
     .includes(version as typeof UNICODE_VERSION_METADATA[number]["version"])) {
@@ -66,11 +81,7 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
     // process all files
     const fileEntries = entries
       .filter((entry) => {
-        return entry.type === "file"
-          && entry.name.endsWith(".txt")
-          && (entry.name !== "ReadMe.txt.txt"
-            || !entry.path.includes("draft")
-            || !entry.path.includes("latest"));
+        return entry.type === "file";
       })
       .map((file) => ({
         name: file.name,
