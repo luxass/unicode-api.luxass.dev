@@ -117,8 +117,6 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
         const fullPath = prefix ? `${prefix}/${entry.path}` : entry.path;
 
         if (!entry.children) {
-          // eslint-disable-next-line no-console
-          console.info(`Checking file: ${fullPath}`, isMatch(fullPath));
           if (!isMatch(fullPath)) {
             result.push(entry);
           }
