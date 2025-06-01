@@ -2,7 +2,7 @@ import type { HonoEnv } from "../types";
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { hasUCDFolderPath, resolveUCDVersion, UNICODE_VERSION_METADATA } from "@luxass/unicode-utils";
 import { cache } from "hono/cache";
-import micromatch from "micromatch";
+import picomatch from "picomatch";
 import { createError } from "../utils";
 import { GET_UNICODE_FILES_BY_VERSION_ROUTE } from "./v1_unicode-files.openapi";
 
@@ -75,22 +75,6 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
     excludePatterns.push("**/*.html");
   }
 
-  function getAllFilePaths(entries: Entry[]) {
-    const filePaths: string[] = [];
-    function collectPaths(entryList: Entry[], currentPath = "") {
-      for (const entry of entryList) {
-        const fullPath = currentPath ? `${currentPath}/${entry.path}` : entry.path;
-        if (!entry.children) {
-          filePaths.push(fullPath);
-        } else if (entry.children.length > 0) {
-          collectPaths(entry.children, fullPath);
-        }
-      }
-    }
-    collectPaths(entries);
-    return filePaths;
-  }
-
   async function processDirectory(entries: UnicodeEntry[]): Promise<Entry[]> {
     // process all directories in parallel
     const dirPromises = entries
@@ -127,13 +111,12 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
   function filterEntriesRecursive(entries: Entry[]) {
     if (excludePatterns.length === 0) return entries;
 
-    const allPaths = getAllFilePaths(entries);
     const patterns = ["**", ...excludePatterns.map((pattern) => `!${pattern}`)];
 
-    const matchedPaths = new Set(micromatch(allPaths, patterns, {
+    const isMatch = picomatch(patterns, {
       dot: true,
       nocase: true,
-    }));
+    });
 
     function filterEntries(entryList: Entry[], prefix = "") {
       const result: Entry[] = [];
@@ -141,7 +124,7 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
         const fullPath = prefix ? `${prefix}/${entry.path}` : entry.path;
 
         if (!entry.children) {
-          if (matchedPaths.has(fullPath)) {
+          if (isMatch(fullPath)) {
             result.push(entry);
           }
         } else {
