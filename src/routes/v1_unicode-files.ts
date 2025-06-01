@@ -107,7 +107,7 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
     if (excludePatterns.length === 0) return entries;
 
     const patterns = ["**", ...excludePatterns.map((pattern) => `!${pattern}`)];
-
+    console.error("PATTERNS", patterns);
     const isMatch = picomatch(patterns, {
       dot: true,
       nocase: true,
