@@ -1,6 +1,6 @@
 # unicode-api
 
-A RESTful API for accessing Unicode Character Database (UCD) data.
+An Api for accessing unicode related data
 
 ## 📦 Installation
 
