@@ -20,6 +20,9 @@ importers:
       hono:
         specifier: ^4.7.10
         version: 4.7.10
+      picomatch:
+        specifier: ^4.0.2
+        version: 4.0.2
       zod:
         specifier: ^3.25.42
         version: 3.25.42
@@ -36,6 +39,9 @@ importers:
       '@stoplight/spectral-cli':
         specifier: ^6.15.0
         version: 6.15.0
+      '@types/picomatch':
+        specifier: ^4.0.0
+        version: 4.0.0
       eslint:
         specifier: ^9.27.0
         version: 9.27.0
@@ -1049,6 +1055,9 @@ packages:
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
+
+  '@types/picomatch@4.0.0':
+    resolution: {integrity: sha512-J1Bng+wlyEERWSgJQU1Pi0HObCLVcr994xT/M+1wcl/yNRTGBupsCxthgkdYG+GCOMaQH7iSVUY3LJVBBqG7MQ==}
 
   '@types/sarif@2.1.7':
     resolution: {integrity: sha512-kRz0VEkJqWLf1LLVN4pT1cg1Z9wAuvI6L97V3m2f5B76Tg8d413ddvLBPTEHAZJlnn4XSvu0FkZtViCQGVyrXQ==}
@@ -4199,6 +4208,8 @@ snapshots:
       undici-types: 6.20.0
 
   '@types/normalize-package-data@2.4.4': {}
+
+  '@types/picomatch@4.0.0': {}
 
   '@types/sarif@2.1.7': {}
 

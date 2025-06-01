@@ -16,6 +16,45 @@ export const GET_UNICODE_FILES_BY_VERSION_ROUTE = createRoute({
         type: "string",
       },
     },
+    {
+      name: "exclude",
+      in: "query",
+      required: false,
+      description: "Optional exclude filters to apply to the file list.",
+      schema: {
+        type: "string",
+      },
+    },
+    {
+      name: "includeTests",
+      in: "query",
+      required: false,
+      description: "Whether to include test files in the response.",
+      schema: {
+        type: "boolean",
+        default: false,
+      },
+    },
+    {
+      name: "includeReadmes",
+      in: "query",
+      required: false,
+      description: "Whether to include Readme files in the response.",
+      schema: {
+        type: "boolean",
+        default: false,
+      },
+    },
+    {
+      name: "includeHTMLFiles",
+      in: "query",
+      required: false,
+      description: "Whether to include HTML files in the response.",
+      schema: {
+        type: "boolean",
+        default: false,
+      },
+    },
   ],
   description: "List all UCD files for a specific Unicode version.",
   responses: {
