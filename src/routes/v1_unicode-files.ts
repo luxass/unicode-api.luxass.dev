@@ -106,9 +106,7 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
   function filterEntriesRecursive(entries: Entry[]) {
     if (excludePatterns.length === 0) return entries;
 
-    const patterns = ["**", ...excludePatterns.map((pattern) => `!${pattern}`)];
-    console.error("PATTERNS", patterns);
-    const isMatch = picomatch(patterns, {
+    const isMatch = picomatch(excludePatterns, {
       dot: true,
       nocase: true,
     });
@@ -121,7 +119,7 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
         if (!entry.children) {
           // eslint-disable-next-line no-console
           console.info(`Checking file: ${fullPath}`, isMatch(fullPath));
-          if (isMatch(fullPath)) {
+          if (!isMatch(fullPath)) {
             result.push(entry);
           }
         } else {
