@@ -2,6 +2,7 @@ import type { HonoEnv } from "../types";
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { hasUCDFolderPath, resolveUCDVersion, UNICODE_VERSION_METADATA } from "@luxass/unicode-utils";
 import { cache } from "hono/cache";
+import micromatch from "micromatch";
 import { createError } from "../utils";
 import { GET_UNICODE_FILES_BY_VERSION_ROUTE } from "./v1_unicode-files.openapi";
 
@@ -60,6 +61,36 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
     extraPath,
   });
 
+  const excludePatterns = exclude?.split(",").map((p) => p.trim()).filter(Boolean) || [];
+
+  if (!includeTests) {
+    excludePatterns.push("**/*Test*");
+  }
+
+  if (!includeReadmes) {
+    excludePatterns.push("**/Readme.txt");
+  }
+
+  if (!includeHTMLFiles) {
+    excludePatterns.push("**/*.html");
+  }
+
+  function getAllFilePaths(entries: Entry[]) {
+    const filePaths: string[] = [];
+    function collectPaths(entryList: Entry[], currentPath = "") {
+      for (const entry of entryList) {
+        const fullPath = currentPath ? `${currentPath}/${entry.path}` : entry.path;
+        if (!entry.children) {
+          filePaths.push(fullPath);
+        } else if (entry.children.length > 0) {
+          collectPaths(entry.children, fullPath);
+        }
+      }
+    }
+    collectPaths(entries);
+    return filePaths;
+  }
+
   async function processDirectory(entries: UnicodeEntry[]): Promise<Entry[]> {
     // process all directories in parallel
     const dirPromises = entries
@@ -92,6 +123,40 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
 
     return [...fileEntries, ...dirEntries];
   }
+
+  function filterEntriesRecursive(entries: Entry[]) {
+    if (excludePatterns.length === 0) return entries;
+
+    const allPaths = getAllFilePaths(entries);
+    const patterns = ["**", ...excludePatterns.map((pattern) => `!${pattern}`)];
+
+    const matchedPaths = new Set(micromatch(allPaths, patterns, {
+      dot: true,
+      nocase: true,
+    }));
+
+    function filterEntries(entryList: Entry[], prefix = "") {
+      const result: Entry[] = [];
+      for (const entry of entryList) {
+        const fullPath = prefix ? `${prefix}/${entry.path}` : entry.path;
+
+        if (!entry.children) {
+          if (matchedPaths.has(fullPath)) {
+            result.push(entry);
+          }
+        } else {
+          const filteredChildren = filterEntries(entry.children, fullPath);
+          if (filteredChildren.length > 0) {
+            result.push({ ...entry, children: filteredChildren });
+          }
+        }
+      }
+      return result;
+    }
+
+    return filterEntries(entries);
+  }
+
   try {
     const response = await fetch(`${c.env.PROXY_URL}/${mappedVersion}${extraPath}`);
     if (!response.ok) {
@@ -100,7 +165,8 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
 
     const rootEntries = await response.json() as UnicodeEntry[];
     const result = await processDirectory(rootEntries);
-    return c.json(result, 200);
+
+    return c.json(filterEntriesRecursive(result), 200);
   } catch (error) {
     console.error("Error processing directory:", error);
     return createError(c, 500, "Failed to fetch file mappings");
