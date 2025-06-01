@@ -34,15 +34,6 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
     includeHTMLFiles = false,
   } = c.req.query();
 
-  // eslint-disable-next-line no-console
-  console.info({
-    exclude,
-    includeTests,
-    includeReadmes,
-    includeHTMLFiles,
-    version,
-  });
-
   if (!UNICODE_VERSION_METADATA.map((v) => v.version)
     .includes(version as typeof UNICODE_VERSION_METADATA[number]["version"])) {
     return createError(c, 400, "Unicode version does not have UCD");
@@ -59,6 +50,10 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
     version,
     mappedVersion,
     extraPath,
+    exclude,
+    includeTests,
+    includeReadmes,
+    includeHTMLFiles,
   });
 
   const excludePatterns = exclude?.split(",").map((p) => p.trim()).filter(Boolean) || [];
@@ -124,6 +119,8 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
         const fullPath = prefix ? `${prefix}/${entry.path}` : entry.path;
 
         if (!entry.children) {
+          // eslint-disable-next-line no-console
+          console.info(`Checking file: ${fullPath}`, isMatch(fullPath));
           if (isMatch(fullPath)) {
             result.push(entry);
           }
