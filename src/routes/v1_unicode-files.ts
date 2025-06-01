@@ -70,6 +70,9 @@ V1_UNICODE_FILES_ROUTER.openapi(GET_UNICODE_FILES_BY_VERSION_ROUTE, async (c) =>
     excludePatterns.push("**/*.html");
   }
 
+  // exclude zip and pdf by default
+  excludePatterns.push("**/*.zip", "**/*.pdf");
+
   async function processDirectory(entries: UnicodeEntry[]): Promise<Entry[]> {
     // process all directories in parallel
     const dirPromises = entries
