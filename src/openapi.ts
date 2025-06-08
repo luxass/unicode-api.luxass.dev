@@ -25,6 +25,10 @@ export function buildOpenApiConfig(version: string, servers: NonNullable<OpenAPI
         name: "Misc",
         description: "Endpoints that don't fit into other categories.",
       },
+      {
+        name: "Files",
+        description: "Endpoints for Unicode Character Database files.",
+      },
     ],
     servers,
   } satisfies OpenAPIObjectConfig;

@@ -5,7 +5,7 @@ import { UnicodeVersionFileSchema } from "./v1_unicode-files.schemas";
 export const GET_UNICODE_FILES_BY_VERSION_ROUTE = createRoute({
   method: "get",
   path: "/{version}",
-  tags: ["Misc"],
+  tags: ["Files"],
   parameters: [
     {
       name: "version",
@@ -14,6 +14,45 @@ export const GET_UNICODE_FILES_BY_VERSION_ROUTE = createRoute({
       description: "The Unicode version to get files for.",
       schema: {
         type: "string",
+      },
+    },
+    {
+      name: "exclude",
+      in: "query",
+      required: false,
+      description: "Optional exclude filters to apply to the file list.",
+      schema: {
+        type: "string",
+      },
+    },
+    {
+      name: "includeTests",
+      in: "query",
+      required: false,
+      description: "Whether to include test files in the response.",
+      schema: {
+        type: "boolean",
+        default: false,
+      },
+    },
+    {
+      name: "includeReadmes",
+      in: "query",
+      required: false,
+      description: "Whether to include Readme files in the response.",
+      schema: {
+        type: "boolean",
+        default: false,
+      },
+    },
+    {
+      name: "includeHTMLFiles",
+      in: "query",
+      required: false,
+      description: "Whether to include HTML files in the response.",
+      schema: {
+        type: "boolean",
+        default: false,
       },
     },
   ],
