@@ -2,6 +2,9 @@
 
 An Api for accessing unicode related data
 
+> [!IMPORTANT]
+> Moved to a new location: [github.com/luxass/unicode-utils](https://github.com/luxass/unicode-utils/tree/main/api)
+
 ## 📦 Installation
 
 ```sh
